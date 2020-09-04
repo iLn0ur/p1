@@ -109,6 +109,11 @@ class GlassAddRemove:
         self.occupied_volume = occupied
 
     def add_water(self, value):
+        if not isinstance(value, (int, float)):
+            raise TypeError('Жду число')
+        if value < 0:
+            raise ValueError('Жду положительное число')
+
         space = self.capacity_volume - self.occupied_volume
         if space < value:
             self.occupied_volume = self.capacity_volume
@@ -118,9 +123,15 @@ class GlassAddRemove:
             return 0
 
     def remove_water(self, value):
+        if not isinstance(value, (int, float)):
+            raise TypeError('Жду число')
+        if value < 0:
+            raise ValueError('Жду положительное число')
+
         if self.occupied_volume < value:
+            rem = value - self.occupied_volume
             self.occupied_volume = 0
-            return value - self.occupied_volume
+            return rem
         else:
             self.occupied_volume -= value
             return 0

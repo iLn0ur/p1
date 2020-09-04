@@ -1,4 +1,4 @@
-from py200_1_1 import Glass, GlassDefaultArg, GlassDefaultListArg
+from py200_1_1 import Glass, GlassDefaultArg, GlassDefaultListArg, GlassAddRemove
 
 
 def main():
@@ -30,5 +30,18 @@ def main3():
     print(gdla, gdla1)
 
 
+def main4():
+    gar = GlassAddRemove(500,0)
+
+    gar.add_water(200)
+
+    print(gar)
+
+    print('over', gar.remove_water(300))
+
+    print('over', gar.add_water(200))
+    print('over', gar.add_water(600))
+
+
 if __name__ == '__main__':
-    main3()
+    main4()
