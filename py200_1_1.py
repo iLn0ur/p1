@@ -31,6 +31,9 @@ class Glass:
         self.capacity_volume = capacity
         self.occupied_volume = occupied
 
+    def __repr__(self):
+        return f'Glass({self.capacity_volume}, {self.occupied_volume})'
+
 
 # 2. Создайте два и более объектов типа Glass
 #    Измените и добавьте в любой стакан любое кол-во воды (через атрибуты)
@@ -50,6 +53,8 @@ class GlassDefaultArg:
             raise ValueError('У тебя лбъем меньше 0!')
 
         self.occupied_volume = occupied
+    def __repr__(self):
+        return f'Glass({self.occupied_volume})'
 
 
 # 4. Создайте класс GlassDefaultListArg (нужен только __init__) 
@@ -74,7 +79,12 @@ class GlassDefaultListArg:
         #     raise ValueError('объем больше вместимости')
 
         self.capacity_volume = capacity
-        self.occupied_volume = occupied
+        self.occupied_volume = occupied.copy()
+
+        self.occupied_volume.append(100)
+
+    def __repr__(self):
+        return f'Glass({self.capacity_volume}, {self.occupied_volume})'
 
 
 # 5. Создайте класс GlassAddRemove, добавьте методы add_water, remove_water
@@ -82,7 +92,41 @@ class GlassDefaultListArg:
 #    Вызовите методы add_water и remove.
 #    Убедитесь, что методы правильно изменяют атрибут occupied_volume.
 
+class GlassAddRemove:
+    def __init__(self, capacity=0, occupied=0):
+        if not isinstance(capacity, (int, float)):
+            raise TypeError('не тот тип, чувак')
+        if not isinstance(occupied, (int, float)):
+            raise TypeError('Не тот тип, чувак!')
+        if capacity < 0:
+            raise ValueError('У тебя вместимость меньше 0!')
+        if occupied < 0:
+            raise ValueError('У тебя лбъем меньше 0!')
+        if capacity < occupied:
+            raise ValueError('объем больше вместимости')
 
+        self.capacity_volume = capacity
+        self.occupied_volume = occupied
+
+    def add_water(self, value):
+        space = self.capacity_volume - self.occupied_volume
+        if space < value:
+            self.occupied_volume = self.capacity_volume
+            return value - space
+        else:
+            self.occupied_volume += value
+            return 0
+
+    def remove_water(self, value):
+        if self.occupied_volume < value:
+            self.occupied_volume = 0
+            return value - self.occupied_volume
+        else:
+            self.occupied_volume -= value
+            return 0
+
+    def __repr__(self):
+        return f'Glass({self.capacity_volume}, {self.occupied_volume})'
 
 # 6. Создайте три объекта типа GlassAddRemove, 
 #    вызовите функцию dir для трёх объектов и для класса GlassAddRemove.
