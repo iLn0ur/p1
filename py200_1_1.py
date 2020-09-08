@@ -24,7 +24,7 @@ class Glass:
         if capacity < 0:
             raise ValueError('У тебя вместимость меньше 0!')
         if occupied < 0:
-            raise ValueError('У тебя лбъем меньше 0!')
+            raise ValueError('У тебя объем меньше 0!')
         if capacity < occupied:
             raise ValueError('объем больше вместимости')
 
